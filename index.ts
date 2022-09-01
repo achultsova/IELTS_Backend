@@ -11,6 +11,11 @@ mongoose.Promise = global.Promise;
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
+const Test = mongoose.Schema({
+    id: String,
+    
+})
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
