@@ -16,7 +16,14 @@
     "typescript": "^4.8.2"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-session": "^2.0.0",
+    "cors": "^2.8.5",
     "express": "^4.18.1",
-    "pg": "^8.8.0"
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^8.8.0",
+    "pino": "^8.5.0",
+    "sequelize": "^6.23.0",
+    "swagger-ui-express": "^4.5.0"
   }
 }
