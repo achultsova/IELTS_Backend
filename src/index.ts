@@ -4,7 +4,7 @@ const cors = require("cors")
 const bodyParser = require("body-parser")
 const cookieParser = require("cookie-parser")
 require("dotenv").config()
-const router = require('./router/index')
+const apiRouters = require('./router/index')
 
 const app = express()
 const PORT = process.env.PORT || 8000
@@ -12,6 +12,7 @@ const PORT = process.env.PORT || 8000
 app.use(cookieParser())
 app.use(cors())
 app.use(express.json())
+app.use('/api', apiRouters)
 
 const atart = async () => {
     try {
