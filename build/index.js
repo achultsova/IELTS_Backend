@@ -41,14 +41,14 @@ var cors = require("cors");
 var bodyParser = require("body-parser");
 var cookieParser = require("cookie-parser");
 require("dotenv").config();
-var apiRouters = require('./router/index');
+var router = require('./router/index');
 var app = express();
 var PORT = process.env.PORT || 8000;
 app.use(cookieParser());
 app.use(cors());
 app.use(express.json());
-app.use('/api', apiRouters);
-var atart = function () { return __awaiter(void 0, void 0, void 0, function () {
+app.use('/api', router);
+var start = function () { return __awaiter(void 0, void 0, void 0, function () {
     var error_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -70,3 +70,4 @@ var atart = function () { return __awaiter(void 0, void 0, void 0, function () {
         }
     });
 }); };
+start();

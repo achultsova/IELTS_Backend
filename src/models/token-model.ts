@@ -1,12 +1,9 @@
-const TokenSchema = new Schema ({
-    user: {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
-    },
-    refreshToken: {
-        type: String,
-        required: true
-    }
+export {};
+const {Schema, model} = require('mongoose');
+
+const TokenSchema = new Schema({
+    user: {type: Schema.Types.ObjectId, ref: 'User'},
+    refreshToken: {type: String, required: true},
 })
 
-module.exports = model('User', UserSchema)
+module.exports = model('Token', TokenSchema);

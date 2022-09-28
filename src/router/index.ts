@@ -5,16 +5,17 @@ const authMiddleware = require('../middlewares/auth-middleware');
 const userController = require('../controllers/user-controller');
 
 
-
-router.post('/signup',
+router.post('/registration',
+    body('name').notEmpty(),
+    body('surname').notEmpty(),
     body('email').isEmail(),
-    body('password').isLength({min: 3, max: 32}),
+    body('password').isLength({min: 8, max: 64}),
     userController.registration
 );
-router.post('/signIn')
-router.post('/logout')
-router.get('/activate/:link')
-router.get('/refresh')
-router.get('/users')
+router.post('/signin', userController.login);
+router.post('/logout', userController.logout);
+router.get('/activate/:link', userController.activate);
+router.get('/refresh', userController.refresh);
+router.get('/users', authMiddleware, userController.getUsers);
 
 module.exports = router

@@ -41,7 +41,7 @@ var MailService = /** @class */ (function () {
         this.transporter = nodemailer.createTransport({
             host: process.env.SMTP_HOST,
             port: process.env.SMTP_PORT,
-            secure: false,
+            secure: true,
             auth: {
                 user: process.env.SMTP_USER,
                 pass: process.env.SMTP_PASSWORD
@@ -55,9 +55,9 @@ var MailService = /** @class */ (function () {
                     case 0: return [4 /*yield*/, this.transporter.sendMail({
                             from: process.env.SMTP_USER,
                             to: to,
-                            subject: 'Активация аккаунта на ' + process.env.API_URL,
+                            subject: 'Thanks for registering',
                             text: '',
-                            html: "\n                    <div>\n                        <h1>\u0414\u043B\u044F \u0430\u043A\u0442\u0438\u0432\u0430\u0446\u0438\u0438 \u043F\u0435\u0440\u0435\u0439\u0434\u0438\u0442\u0435 \u043F\u043E \u0441\u0441\u044B\u043B\u043A\u0435</h1>\n                        <a href=\"".concat(link, "\">").concat(link, "</a>\n                    </div>\n                ")
+                            html: "\n                <!DOCTYPE html>\n                <html lang=\"en\">\n                <head>\n                    <meta charset=\"UTF-8\">\n                    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n                    <link href=\"https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@300&display=swap\" rel=\"stylesheet\">\n                    <title>Registering</title>\n                </head>\n              <body>\n                <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" bgcolor=\"#F2F5F5\">\n                    <tr>\n                        <td align=\"center\" >\n                            <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"600\" bgcolor=\"#393E59\" style=\"padding-left: 40px; margin-top: 60px\">\n                                <tr>\n                                    <td>\n                                        <h3 style=\"font-size: 36px; font-family: IBM Plex Serif; font-weight: 300; color: #fff\">Thanks for registering!</h3>\n                                    </td>\n                                </tr>\n                               </table>\n                        </td>\n                    </tr>\n                    <tr>\n                        <td align=\"center\">\n                            <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"600\" bgcolor=\"#fff\" style=\"padding-left: 40px; padding-bottom: 46px; padding-top: 40px; margin-top: 20px; font-family: Arial, Helvetica, sans-serif;\">\n                                <tr>\n                                    <td>\n                                        <p>\n                                            Thanks for creating an account.<br>\n                                            Please confirm your email and sign in with your credentials.\n                                        </p>\n                                    </td>\n                                </tr>\n                                <tr>\n                                    <td>\n                                        <a href=".concat(link, " style=\"text-decoration: none; color: #000;\">Confirm your email \u2192</a>\n                                    </td>\n                                </tr>\n                            </table>\n                        </td>\n                    </tr>\n                  </table>\n                </body>\n            </html>\n                ")
                         })];
                     case 1:
                         _a.sent();

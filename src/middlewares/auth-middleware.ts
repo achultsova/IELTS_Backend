@@ -1,5 +1,7 @@
+export {};
 const ApiErrorr = require('../exceptions/api-error');
 const tokenService = require('../service/token-service');
+
 
 module.exports = function (req: any, res: any, next: any) {
     try {

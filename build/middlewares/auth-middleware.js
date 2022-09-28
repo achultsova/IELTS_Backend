@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var ApiErrorr = require('../exceptions/api-error');
 var tokenService = require('../service/token-service');
 module.exports = function (req, res, next) {

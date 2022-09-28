@@ -4,7 +4,7 @@ const cors = require("cors")
 const bodyParser = require("body-parser")
 const cookieParser = require("cookie-parser")
 require("dotenv").config()
-const apiRouters = require('./router/index')
+const router = require('./router/index')
 
 const app = express()
 const PORT = process.env.PORT || 8000
@@ -12,9 +12,9 @@ const PORT = process.env.PORT || 8000
 app.use(cookieParser())
 app.use(cors())
 app.use(express.json())
-app.use('/api', apiRouters)
+app.use('/api', router)
 
-const atart = async () => {
+const start = async () => {
     try {
         await mongoose.connect(process.env.DB_URL, {
             useNewUrlParser: true,
@@ -25,3 +25,5 @@ const atart = async () => {
         console.log(error)
     } 
 }
+
+start()
