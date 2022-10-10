@@ -1,0 +1,15 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var tslib_1 = require("tslib");
+var express_1 = tslib_1.__importDefault(require("express"));
+var router = express_1.default.Router();
+var body = require('express-validator').body;
+var authMiddleware = require('../middlewares/auth-middleware');
+var userController = require('../controllers/user-controller');
+router.post('/registration', body('name').notEmpty(), body('surname').notEmpty(), body('email').isEmail(), body('password').isLength({ min: 8, max: 64 }), userController.registration);
+router.post('/signin', userController.login);
+router.post('/logout', userController.logout);
+router.get('/activate/:link', userController.activate);
+router.get('/refresh', userController.refresh);
+router.get('/users', authMiddleware, userController.getUsers);
+module.exports = router;
