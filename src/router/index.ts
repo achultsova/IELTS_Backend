@@ -11,10 +11,10 @@ router.post('/registration',
     body('surname').notEmpty().isLength({min: 1, max: 30}).withMessage('Name length must be between 1 and 30 symbols')
         .matches(/^[A-Za-z\s]+$/).withMessage('Name can contain only letters'),
     body('email').isEmail().isLength({max: 256}).withMessage('Email length must be no more than 256 symbols'),
-    body('password').isEmail().isLength({max: 256}).withMessage('Email length must be no more than 256 symbols'),
+    body('password').isLength({min: 8, max: 64}).withMessage('Email length must be no more than 256 symbols'),
     userController.registration
 );
-router.post('/signin',
+router.post('/login',
     body('email').isEmail().isLength({max: 256}).withMessage('Email length must be no more than 256 symbols'),
     body('password').isEmail().isLength({max: 256}).withMessage('Email length must be no more than 256 symbols'),
     userController.login);

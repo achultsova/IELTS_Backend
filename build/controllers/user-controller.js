@@ -43,7 +43,7 @@ var UserController = /** @class */ (function () {
     }
     UserController.prototype.registration = function (req, res, next) {
         return __awaiter(this, void 0, void 0, function () {
-            var errors, _a, name, surname, email, password, userData, e_1;
+            var errors, _a, name, surname, email, password, isAdmin, userData, e_1;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
@@ -52,8 +52,8 @@ var UserController = /** @class */ (function () {
                         if (!errors.isEmpty()) {
                             return [2 /*return*/, next(ApiError.BadRequest('Ошибка при валидации', errors.array()))];
                         }
-                        _a = req.body, name = _a.name, surname = _a.surname, email = _a.email, password = _a.password;
-                        return [4 /*yield*/, userService.registration(name, surname, email, password)];
+                        _a = req.body, name = _a.name, surname = _a.surname, email = _a.email, password = _a.password, isAdmin = _a.isAdmin;
+                        return [4 /*yield*/, userService.registration(name, surname, email, password, isAdmin)];
                     case 1:
                         userData = _b.sent();
                         res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true });
