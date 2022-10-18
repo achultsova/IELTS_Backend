@@ -16,6 +16,10 @@ var UserSchema = new Schema({
         type: String,
         required: true,
     },
+    isAdmin: {
+        type: Boolean,
+        default: false
+    },
     isActivated: {
         type: Boolean,
         default: false

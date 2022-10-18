@@ -11,7 +11,7 @@ var ApiError = require('../exceptions/api-error');
 var UserService = /** @class */ (function () {
     function UserService() {
     }
-    UserService.prototype.registration = function (name, surname, email, password) {
+    UserService.prototype.registration = function (name, surname, email, password, isAdmin) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var candidate, hashPassword, activationLink, user, userDto, tokens;
             return tslib_1.__generator(this, function (_a) {
@@ -26,7 +26,7 @@ var UserService = /** @class */ (function () {
                     case 2:
                         hashPassword = _a.sent();
                         activationLink = uuid.v4();
-                        return [4 /*yield*/, UserModel.create({ name: name, surname: surname, email: email, password: hashPassword, activationLink: activationLink })];
+                        return [4 /*yield*/, UserModel.create({ name: name, surname: surname, email: email, password: hashPassword, activationLink: activationLink, isAdmin: isAdmin })];
                     case 3:
                         user = _a.sent();
                         return [4 /*yield*/, mailService.sendActivationMail(email, "".concat(process.env.API_URL, "/api/activate/").concat(activationLink))];
