@@ -1,6 +1,10 @@
 "use strict";
 var _a = require('mongoose'), Schema = _a.Schema, model = _a.model;
 var UserSchema = new Schema({
+    id: {
+        type: String,
+        unique: true,
+    },
     name: {
         type: String,
     },
@@ -25,6 +29,9 @@ var UserSchema = new Schema({
         default: false
     },
     activationLink: {
+        type: String
+    },
+    resetLink: {
         type: String
     }
 });

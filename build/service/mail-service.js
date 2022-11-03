@@ -66,6 +66,24 @@ var MailService = /** @class */ (function () {
             });
         });
     };
+    MailService.prototype.sendForgotPasswordMail = function (to, link) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.transporter.sendMail({
+                            from: process.env.SMTP_USER,
+                            to: to,
+                            subject: 'Forgot password',
+                            text: '',
+                            html: "\n                <!DOCTYPE html>\n                <html lang=\"en\">\n                <head>\n                    <meta charset=\"UTF-8\">\n                    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n                    <link href=\"https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@300&display=swap\" rel=\"stylesheet\">\n                    <title>Registering</title>\n                </head>\n              <body>\n                <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" bgcolor=\"#F2F5F5\">\n                    <tr>\n                        <td align=\"center\" >\n                            <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"600\" bgcolor=\"#393E59\" style=\"padding-left: 40px; margin-top: 60px\">\n                                <tr>\n                                    <td>\n                                        <h3 style=\"font-size: 36px; font-family: IBM Plex Serif; font-weight: 300; color: #fff\">Recover the password</h3>\n                                    </td>\n                                </tr>\n                               </table> \n                        </td>\n                    </tr>\n                    <tr>\n                        <td align=\"center\">\n                            <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"600\" bgcolor=\"#fff\" style=\"padding-left: 40px; padding-bottom: 46px; padding-top: 40px; margin-bottom: 60px; margin-top: 20px; font-family: Arial, Helvetica, sans-serif;\">\n                                <tr>\n                                    <td>\n                                        <p>\n                                        Hello,<br>\n                                        We've just received a password reset request. Please click the link below<br>\n                                        to reset your password. If you did NOT request a new password, ignore<br>\n                                        this email and your password will remain unchanged. \n                                        </p>\n                                    </td>\n                                </tr>\n                                <tr>\n                                    <td>\n                                        <a href=".concat(link, " style=\"text-decoration: none; color: #000;\">Reset password \u2192</a>\n                                    </td>\n                                </tr>\n                            </table>\n                        </td>\n                    </tr>\n                  </table>\n                </body>\n            </html>\n                ")
+                        })];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
     return MailService;
 }());
 module.exports = new MailService();
