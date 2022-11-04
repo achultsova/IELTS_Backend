@@ -1,6 +1,10 @@
-const {Schema, model} = require('mongoose')
+const { Schema, model } = require('mongoose')
 
-const UserSchema = new Schema ({
+const UserSchema = new Schema({
+    id: {
+        type: String,
+        unique: true,
+    },
     name: {
         type: String,
     },
@@ -25,6 +29,9 @@ const UserSchema = new Schema ({
         default: false
     },
     activationLink: {
+        type: String
+    },
+    resetLink: {
         type: String
     }
 })
