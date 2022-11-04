@@ -56,7 +56,7 @@ class UserController {
     async setNewPassword(req: any, res: any, next: any) {
         try {
             const { password } = req.body;
-            const id = new mongoose.Schema.Types.ObjectId(req.params.id);
+            const id = new mongoose.Types.ObjectId(req.params.id);
             console.log(id)
             const userData = await userService.setNewPassword(password, id);
             res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true })

@@ -73,24 +73,27 @@ class UserService {
     async reset(resetLink: string) {
         const user = await UserModel.findOne({ resetLink })
         if (!user) {
-            throw ApiError.BadRequest('Неккоректная ссылка активации')
+            throw ApiError.BadRequest('Неккоректная ссылка смены пароля')
         }
         return
     }
 
     async setNewPassword(password: string, id: ObjectId) {
-        const user = await UserModel.find({ _id: id })
-        console.log(user)
+        const user = await UserModel.findOne({ _id: id })
+        if (!user) {
+            throw ApiError.BadRequest('Пользователь с таким id не найден')
+        }
+        console.log(password, user.password)
         const isPassEquals = await bcrypt.compare(password, user.password);
         if (isPassEquals) {
             throw ApiError.BadRequest('Пароль не должен быть как предыдущий');
         }
-        user.password = password;
+        const hashPassword = await bcrypt.hash(password, 3)
+        user.password = hashPassword;
         await user.save();
         const userDto = new UserDto(user);
         const tokens = tokenService.generateTokens({ ...userDto });
         await tokenService.saveToken(userDto.id, tokens.refreshToken);
-
         return { ...tokens, user: userDto }
     }
 

@@ -128,7 +128,7 @@ var UserService = /** @class */ (function () {
                     case 1:
                         user = _a.sent();
                         if (!user) {
-                            throw ApiError.BadRequest('Неккоректная ссылка активации');
+                            throw ApiError.BadRequest('Неккоректная ссылка смены пароля');
                         }
                         return [2 /*return*/];
                 }
@@ -137,27 +137,33 @@ var UserService = /** @class */ (function () {
     };
     UserService.prototype.setNewPassword = function (password, id) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var user, isPassEquals, userDto, tokens;
+            var user, isPassEquals, hashPassword, userDto, tokens;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, UserModel.find({ _id: id })];
+                    case 0: return [4 /*yield*/, UserModel.findOne({ _id: id })];
                     case 1:
                         user = _a.sent();
-                        console.log(user);
+                        if (!user) {
+                            throw ApiError.BadRequest('Пользователь с таким id не найден');
+                        }
+                        console.log(password, user.password);
                         return [4 /*yield*/, bcrypt.compare(password, user.password)];
                     case 2:
                         isPassEquals = _a.sent();
                         if (isPassEquals) {
                             throw ApiError.BadRequest('Пароль не должен быть как предыдущий');
                         }
-                        user.password = password;
-                        return [4 /*yield*/, user.save()];
+                        return [4 /*yield*/, bcrypt.hash(password, 3)];
                     case 3:
+                        hashPassword = _a.sent();
+                        user.password = hashPassword;
+                        return [4 /*yield*/, user.save()];
+                    case 4:
                         _a.sent();
                         userDto = new UserDto(user);
                         tokens = tokenService.generateTokens(tslib_1.__assign({}, userDto));
                         return [4 /*yield*/, tokenService.saveToken(userDto.id, tokens.refreshToken)];
-                    case 4:
+                    case 5:
                         _a.sent();
                         return [2 /*return*/, tslib_1.__assign(tslib_1.__assign({}, tokens), { user: userDto })];
                 }

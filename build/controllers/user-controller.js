@@ -109,7 +109,7 @@ var UserController = /** @class */ (function () {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
                         password = req.body.password;
-                        id = new mongoose_1.default.Schema.Types.ObjectId(req.params.id);
+                        id = new mongoose_1.default.Types.ObjectId(req.params.id);
                         console.log(id);
                         return [4 /*yield*/, userService.setNewPassword(password, id)];
                     case 1:
