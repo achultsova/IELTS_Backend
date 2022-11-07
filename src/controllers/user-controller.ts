@@ -66,6 +66,16 @@ class UserController {
         }
     }
 
+    async changeInfo(req: any, res: any, next: any) {
+        try {
+            const { email, name, surname } = req.body
+            const userData = await userService.changeInfo(email, name, surname);
+            return res.json(userData);
+        } catch (e) {
+            next(e);
+        }
+    }
+
     async logout(req: any, res: any, next: any) {
         try {
             const { refreshToken } = req.cookies;
