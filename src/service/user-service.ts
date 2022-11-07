@@ -109,6 +109,22 @@ class UserService {
         return { user: userDto }
     }
 
+    async changePassword(password: string, id: ObjectId) {
+        const user = await UserModel.findOne({ _id: id })
+        if (!user) {
+            throw ApiError.BadRequest('Пользователь с таким id не найден')
+        }
+        const isPassEquals = await bcrypt.compare(password, user.password);
+        if (isPassEquals) {
+            throw ApiError.BadRequest('Пароль не должен быть как предыдущий');
+        }
+        const hashPassword = await bcrypt.hash(password, 3)
+        user.password = hashPassword;
+        await user.save();
+        const userDto = new UserDto(user);
+        return { user: userDto }
+    }
+
     async logout(refreshToken: string) {
         const token = await tokenService.removeToken(refreshToken);
         return token;

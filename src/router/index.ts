@@ -31,6 +31,9 @@ router.post('/changeInfo',
         .matches(/^[A-Za-z\s]+$/).withMessage('Name can contain only letters'),
     userController.changeInfo
 );
+router.post('/changePassword/:id',
+    body('password').isLength({ min: 8, max: 64 }).withMessage('Email length must be no more than 256 symbols'),
+    userController.changePassword)
 router.post('/logout', userController.logout);
 router.get('/reset/:link/:id', userController.reset);
 router.get('/activate/:link', userController.activate);

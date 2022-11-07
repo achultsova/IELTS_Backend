@@ -76,6 +76,17 @@ class UserController {
         }
     }
 
+    async changePassword(req: any, res: any, next: any) {
+        try {
+            const { password } = req.body;
+            const id = new mongoose.Types.ObjectId(req.params.id);
+            const userData = await userService.changePassword(password, id);
+            return res.json(userData);
+        } catch (e) {
+            next(e);
+        }
+    }
+
     async logout(req: any, res: any, next: any) {
         try {
             const { refreshToken } = req.cookies;
