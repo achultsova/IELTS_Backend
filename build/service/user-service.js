@@ -170,6 +170,28 @@ var UserService = /** @class */ (function () {
             });
         });
     };
+    UserService.prototype.changeInfo = function (email, name, surname) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var user, userDto;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, UserModel.findOne({ email: email })];
+                    case 1:
+                        user = _a.sent();
+                        if (!user) {
+                            throw ApiError.BadRequest('Пользователь с таким email не найден');
+                        }
+                        user.name = name;
+                        user.surname = surname;
+                        return [4 /*yield*/, user.save()];
+                    case 2:
+                        _a.sent();
+                        userDto = new UserDto(user);
+                        return [2 /*return*/, { user: userDto }];
+                }
+            });
+        });
+    };
     UserService.prototype.logout = function (refreshToken) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var token;

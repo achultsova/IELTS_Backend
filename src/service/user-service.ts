@@ -97,6 +97,18 @@ class UserService {
         return { ...tokens, user: userDto }
     }
 
+    async changeInfo(email: string, name: string, surname: string) {
+        const user = await UserModel.findOne({ email })
+        if (!user) {
+            throw ApiError.BadRequest('Пользователь с таким email не найден')
+        }
+        user.name = name;
+        user.surname = surname;
+        await user.save();
+        const userDto = new UserDto(user);
+        return { user: userDto }
+    }
+
     async logout(refreshToken: string) {
         const token = await tokenService.removeToken(refreshToken);
         return token;

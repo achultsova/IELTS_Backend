@@ -125,9 +125,30 @@ var UserController = /** @class */ (function () {
             });
         });
     };
+    UserController.prototype.changeInfo = function (req, res, next) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var _a, email, name, surname, userData, e_6;
+            return tslib_1.__generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        _b.trys.push([0, 2, , 3]);
+                        _a = req.body, email = _a.email, name = _a.name, surname = _a.surname;
+                        return [4 /*yield*/, userService.changeInfo(email, name, surname)];
+                    case 1:
+                        userData = _b.sent();
+                        return [2 /*return*/, res.json(userData)];
+                    case 2:
+                        e_6 = _b.sent();
+                        next(e_6);
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
     UserController.prototype.logout = function (req, res, next) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var refreshToken, token, e_6;
+            var refreshToken, token, e_7;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -139,8 +160,8 @@ var UserController = /** @class */ (function () {
                         res.clearCookie('refreshToken');
                         return [2 /*return*/, res.json(token)];
                     case 2:
-                        e_6 = _a.sent();
-                        next(e_6);
+                        e_7 = _a.sent();
+                        next(e_7);
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
                 }
@@ -149,7 +170,7 @@ var UserController = /** @class */ (function () {
     };
     UserController.prototype.activate = function (req, res, next) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var activationLink, e_7;
+            var activationLink, e_8;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -160,8 +181,8 @@ var UserController = /** @class */ (function () {
                         _a.sent();
                         return [2 /*return*/, res.redirect(process.env.CLIENT_URL)];
                     case 2:
-                        e_7 = _a.sent();
-                        next(e_7);
+                        e_8 = _a.sent();
+                        next(e_8);
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
                 }
@@ -170,7 +191,7 @@ var UserController = /** @class */ (function () {
     };
     UserController.prototype.refresh = function (req, res, next) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var refreshToken, userData, e_8;
+            var refreshToken, userData, e_9;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -182,8 +203,8 @@ var UserController = /** @class */ (function () {
                         res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true });
                         return [2 /*return*/, res.json(userData)];
                     case 2:
-                        e_8 = _a.sent();
-                        next(e_8);
+                        e_9 = _a.sent();
+                        next(e_9);
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
                 }
@@ -192,7 +213,7 @@ var UserController = /** @class */ (function () {
     };
     UserController.prototype.getUsers = function (req, res, next) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var users, e_9;
+            var users, e_10;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -202,8 +223,8 @@ var UserController = /** @class */ (function () {
                         users = _a.sent();
                         return [2 /*return*/, res.json(users)];
                     case 2:
-                        e_9 = _a.sent();
-                        next(e_9);
+                        e_10 = _a.sent();
+                        next(e_10);
                         return [3 /*break*/, 3];
                     case 3: return [2 /*return*/];
                 }
