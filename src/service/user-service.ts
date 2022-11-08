@@ -83,7 +83,6 @@ class UserService {
         if (!user) {
             throw ApiError.BadRequest('Пользователь с таким id не найден')
         }
-        console.log(password, user.password)
         const isPassEquals = await bcrypt.compare(password, user.password);
         if (isPassEquals) {
             throw ApiError.BadRequest('Пароль не должен быть как предыдущий');
@@ -114,7 +113,6 @@ class UserService {
         if (!user) {
             throw ApiError.BadRequest('Пользователь с таким id не найден')
         }
-        console.log(user)
         const isOld = await bcrypt.compare(oldPassword, user.password);
         if (!isOld) {
             throw ApiError.BadRequest('Не верный старый пароль');
