@@ -109,10 +109,15 @@ class UserService {
         return { user: userDto }
     }
 
-    async changePassword(password: string, id: ObjectId) {
+    async changePassword(password: string, oldPassword: string, id: ObjectId) {
         const user = await UserModel.findOne({ _id: id })
         if (!user) {
             throw ApiError.BadRequest('Пользователь с таким id не найден')
+        }
+        console.log(user)
+        const isOld = await bcrypt.compare(oldPassword, user.password);
+        if (!isOld) {
+            throw ApiError.BadRequest('Не верный старый пароль');
         }
         const isPassEquals = await bcrypt.compare(password, user.password);
         if (isPassEquals) {

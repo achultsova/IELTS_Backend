@@ -78,9 +78,9 @@ class UserController {
 
     async changePassword(req: any, res: any, next: any) {
         try {
-            const { password } = req.body;
+            const { password, oldPassword } = req.body;
             const id = new mongoose.Types.ObjectId(req.params.id);
-            const userData = await userService.changePassword(password, id);
+            const userData = await userService.changePassword(password, oldPassword, id);
             return res.json(userData);
         } catch (e) {
             next(e);
