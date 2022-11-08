@@ -45,7 +45,6 @@ class UserController {
         try {
             const resetLink = req.params.link;
             const id = req.params.id;
-            console.log(id)
             await userService.reset(resetLink);
             return res.redirect(`${process.env.CLIENT_URL}/setNewPassword/${id}`);
         } catch (e) {
@@ -57,7 +56,6 @@ class UserController {
         try {
             const { password } = req.body;
             const id = new mongoose.Types.ObjectId(req.params.id);
-            console.log(id)
             const userData = await userService.setNewPassword(password, id);
             res.cookie('refreshToken', userData.refreshToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true })
             return res.json(userData);
@@ -70,6 +68,17 @@ class UserController {
         try {
             const { email, name, surname } = req.body
             const userData = await userService.changeInfo(email, name, surname);
+            return res.json(userData);
+        } catch (e) {
+            next(e);
+        }
+    }
+
+    async changePassword(req: any, res: any, next: any) {
+        try {
+            const { password, oldPassword } = req.body;
+            const id = new mongoose.Types.ObjectId(req.params.id);
+            const userData = await userService.changePassword(password, oldPassword, id);
             return res.json(userData);
         } catch (e) {
             next(e);
