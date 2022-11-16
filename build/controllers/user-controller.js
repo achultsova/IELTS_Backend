@@ -87,7 +87,6 @@ var UserController = /** @class */ (function () {
                         _a.trys.push([0, 2, , 3]);
                         resetLink = req.params.link;
                         id = req.params.id;
-                        console.log(id);
                         return [4 /*yield*/, userService.reset(resetLink)];
                     case 1:
                         _a.sent();
@@ -110,7 +109,6 @@ var UserController = /** @class */ (function () {
                         _a.trys.push([0, 2, , 3]);
                         password = req.body.password;
                         id = new mongoose_1.default.Types.ObjectId(req.params.id);
-                        console.log(id);
                         return [4 /*yield*/, userService.setNewPassword(password, id)];
                     case 1:
                         userData = _a.sent();
