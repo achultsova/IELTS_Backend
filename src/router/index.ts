@@ -3,6 +3,7 @@ const router = express.Router()
 const { body } = require('express-validator');
 const authMiddleware = require('../middlewares/auth-middleware');
 const userController = require('../controllers/user-controller');
+const testController = require('../controllers/test-controller');
 
 
 router.post('/registration',
@@ -39,5 +40,11 @@ router.get('/reset/:link/:id', userController.reset);
 router.get('/activate/:link', userController.activate);
 router.get('/refresh', userController.refresh);
 router.get('/users', authMiddleware, userController.getUsers);
+
+router.get('/getAllTests', testController.getAllTests)
+router.post('/createTest',
+    body('count').notEmpty(),
+    testController.createTest);
+router.get('/getTestNumber/:id', testController.getTestNumber)
 
 module.exports = router

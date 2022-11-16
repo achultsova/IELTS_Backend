@@ -146,7 +146,6 @@ var UserService = /** @class */ (function () {
                         if (!user) {
                             throw ApiError.BadRequest('Пользователь с таким id не найден');
                         }
-                        console.log(password, user.password);
                         return [4 /*yield*/, bcrypt.compare(password, user.password)];
                     case 2:
                         isPassEquals = _a.sent();
@@ -203,7 +202,6 @@ var UserService = /** @class */ (function () {
                         if (!user) {
                             throw ApiError.BadRequest('Пользователь с таким id не найден');
                         }
-                        console.log(user);
                         return [4 /*yield*/, bcrypt.compare(oldPassword, user.password)];
                     case 2:
                         isOld = _a.sent();
